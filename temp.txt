@@ -1,0 +1,177 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+use App\Stock;
+use Illuminate\Support\Facades\Auth;
+
+use App\Category;
+use App\Http\Controllers\Controller;
+use App\Product;
+use App\Retailer;
+use App\Sales;
+use App\Unit;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
+class SalesController extends Controller
+{
+    public function index()
+    {
+        $sales = Sales::where('user_id', Auth::user()->id)->paginate(10);
+        return view('trade.sales.index',compact('sales'));
+    }
+    public function allSales()
+    {
+        $sales = Sales::orderBy('id','DESC')->paginate(10);
+        return view('trade.sales.all-sales',compact('sales'));
+    }
+    public function create()
+    {
+        $user = Auth::user();
+        $sales = Sales::orderBy('id','DESC')->get();
+        $retailers = Retailer::orderBy('id','Desc')->get();
+        $categories = Category::orderBy('id','DESC')->get();
+        $units = Unit::orderBy('id','DESC')->get();
+        return view('trade.sales.create',compact('retailers','categories','units','user','sales'));
+    }
+    public function store(Request $request)
+    {
+//        dd($request->all());
+        Sales::create([
+            'user_id' => $request->user_id,
+            'order_no' => $request->order_no,
+            'date' => $request->date,
+            'retailer_id' => $request->retailer_id,
+            'old_out_standing' => $request->old_out_standing,
+            'category' => json_encode($request->category),
+            'product' => json_encode($request->product),
+            'price' => json_encode($request->price),
+            'quantity' => json_encode($request->quantity),
+            'unit' => json_encode($request->unit),
+            'total_price' => json_encode($request->total_price),
+            'amount' => $request->amount,
+            'commission_type' => $request->commission_type,
+            'commission' => $request->commission,
+            'discount' => $request->discount,
+            'bill' => $request->bill,
+            'total_out_standing' => $request->total_out_standing,
+        ]);
+        Session::flash('success','Sales Create Successfully');
+        return redirect()->route('sales.index');
+    }
+    public function show($id)
+    {
+        $show = Sales::find($id);
+        $check_retailer = Retailer::select('name','phone','address')->find($show->retailer_id);
+        $check_user = User::select('name','phone')->find($show->user_id);
+        if(!empty($check_retailer)){
+            $retailer['name'] = $check_retailer['name'];
+            $retailer['phone'] = $check_retailer['phone'];
+        }else{
+            $retailer['name'] = 'N/A';
+            $retailer['phone'] = 'N/A';
+        }
+        if(!empty($check_user)){
+            $user['name'] = $check_user['name'];
+            $user['phone'] = $check_user['phone'];
+        }else{
+            $user['name'] = 'N/A';
+            $user['phone'] = 'N/A';
+        }
+        $show['category'] = explode(',',str_replace(str_split('[]""'),'',$show->category));
+        $show['product'] = explode(',',str_replace(str_split('[]""'),'',$show->product));
+        $show['price'] = explode(',',str_replace(str_split('[]""'),'',$show->price));
+        $show['quantity'] = explode(',',str_replace(str_split('[]""'),'',$show->quantity));
+        $show['unit'] = explode(',',str_replace(str_split('[]""'),'',$show->unit));
+        $show['total_price'] = explode(',',str_replace(str_split('[]""'),'',$show->total_price));
+        return view('trade.sales.show',compact('show','retailer','user'));
+    }
+    public function edit($id)
+    {
+        $edit = Sales::find($id);
+        $edit['category'] = explode(',',str_replace(str_split('[]""'),'',$edit->category));
+        $edit['product'] = explode(',',str_replace(str_split('[]""'),'',$edit->product));
+        $edit['price'] = explode(',',str_replace(str_split('[]""'),'',$edit->price));
+        $edit['quantity'] = explode(',',str_replace(str_split('[]""'),'',$edit->quantity));
+        $edit['unit'] = explode(',',str_replace(str_split('[]""'),'',$edit->unit));
+        $edit['total_price'] = explode(',',str_replace(str_split('[]""'),'',$edit->total_price));
+        $retailers = Retailer::orderBy('id','Desc')->get();
+        $categories = Category::orderBy('id','DESC')->get();
+        $units = Unit::orderBy('id','DESC')->get();
+        $products = Product::whereIn('category_id', $edit->category)->orderBy('id','DESC')->get();
+        $edit_retailer = Retailer::find($edit->retailer_id);
+        return view('trade.sales.edit',compact('edit','retailers','categories','units', 'products', 'edit_retailer'));
+    }
+    public function update(Request $request, $id)
+    {
+        $sales = Sales::find($id);
+        $sales->update([
+            'order_no' => $request->order_no,
+            'date' => $request->date,
+            'retailer_id' => $request->retailer_id,
+            'old_out_standing' => $request->old_out_standing,
+            'category' => json_encode($request->category),
+            'product' => json_encode($request->product),
+            'price' => json_encode($request->price),
+            'quantity' => json_encode($request->quantity),
+            'unit' => json_encode($request->unit),
+            'total_price' => json_encode($request->total_price),
+            'amount' => $request->amount,
+            'commission_type' => $request->commission_type,
+            'commission' => $request->commission,
+            'discount' => $request->discount,
+            'bill' => $request->bill,
+            'total_out_standing' => $request->total_out_standing,
+        ]);
+        Session::flash('success', 'Sales Updated Successfully');
+        return redirect()->route('sales.index');
+    }
+    public function destroy($id)
+    {
+        $delete = Sales::find($id);
+        if (!is_null($delete)) {
+            $delete->delete();
+        }
+        Session::flash('success','Sale Deleted Successfully');
+        return redirect()->route('sales.index');
+    }
+    public function productFind($id){
+        $products = Product::where('category_id', $id)->orderBy('id', 'DESC')->get();
+        return response()->json($products);
+    }
+    public function priceFind($id){
+        $price = Product::find($id)->product_price;
+        $stock_quantity = Stock::where('product', $id)->first();
+        if(!empty($stock_quantity)){
+            $left = $stock_quantity->left;
+        }
+        else{
+            $left = '';
+        }
+        return response()->json([$price, $left]);
+    }
+    public function get_retailer_old_out_standing($id){
+        $old_out_standing = Retailer::find($id)->due;
+        return response()->json($old_out_standing);
+    }
+    public function salesOverview(){
+        $sales = Sales::orderBy('id','DESC')->paginate(10);
+        $total_amount = Sales::sum('amount');
+        $discount = Sales::sum('discount');
+        $bill = Sales::sum('bill');
+        $from = null;
+        $to = null;
+        return view('transaction.sales_overview',compact('sales','from', 'to' , 'total_amount', 'discount', 'bill'));
+    }
+    public function salesOverviewFind(Request $request){
+        $from = $request->date_from;
+        $to = $request->date_to;
+        $sales = Sales::whereDate('date', '>=', $from)->whereDate('date', '<=', $to)->orderBy('id', 'DESC')->paginate(10);
+        $total_amount = Sales::sum('amount');
+        $discount = Sales::sum('discount');
+        $bill = Sales::sum('bill');
+        return view('transaction.sales_overview',compact('sales','from', 'to' , 'total_amount', 'discount', 'bill'));
+    }
+
+}

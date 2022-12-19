@@ -1,0 +1,390 @@
+.check {
+    position: relative;
+
+    /*background-color:white;*/
+    width:693px;
+    height:320px;
+    border:2px solid white;
+}
+#container{
+    /*background-color:#d9fad1;*/
+    /*background:url(../images/citybank.jpg)no-repeat center center;*/
+    overflow: hidden;
+    margin: 3px;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right:0;
+    border:1px solid black;
+}
+.content{
+    margin:5px;
+}
+.one{
+    width:100%;
+}
+.title{
+    width:300px;
+    text-align:center;
+    font-family: Helvetica;
+    display:inline-block;
+    margin-left:25px;
+    margin-bottom:40px;
+
+
+}
+
+#bold{
+    font-weight:bold;
+    font-size:24px;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+    line-height:150%;
+
+}
+
+
+#name_bank{
+    text-transform:uppercase;
+    font-size:18px;
+    letter-spacing:0.1px;
+}
+.number {
+    font-family: "Courier New";
+    font-weight: bold;
+    margin-top:20px;
+    font-size:20px;
+    margin-left:103px;
+    display:inline-block;
+    position:fixed;
+    letter-spacing:1px;
+
+
+}
+.following{
+    display:inline-block;
+    font-family: Helvetica;
+    font-size:10px;
+    text-transform:uppercase;
+    border:1px solid;
+    width:417px;
+    margin-left:16px;
+    margin-top:10px;
+    border-collapse:collapse;
+}
+.line{
+    text-align:center;
+    width:415px;
+    height:26px;
+    font-size:8px;
+    /*padding:12px;*/
+
+}
+
+.empty{
+    border-top:1px solid;
+
+
+}
+.two{
+    width:100%;
+    margin-top:16px;
+
+}
+
+.orderof {
+    font-family: 'Damion', cursive;
+    font-size: 1.5em;
+    border-bottom: 1px solid #333;
+    float: left;
+    width: 75.9%;
+    position: relative;
+    padding-top: 0;
+    padding: 0 0 0 1em;
+    margin: 0px 0 2px 2em;
+    line-height: 1;
+    height: 32px;
+    border-right: 1px solid #333;
+}
+
+.orderof:before {
+    font-family: Helvetica;
+    font-size: 0.5em;
+    content: 'PAY';
+    position: absolute;
+    left: -3em;
+    top: 1.3em;
+
+}
+#amount_bank {
+    width: 145px;
+    display: inline-table;
+    height: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    /*position: fixed;*/
+    position: absolute;
+    /*top: 195px;*/
+    top : 30px;
+    text-align: left;
+    margin-left: -215px;
+    border: 0;
+}
+#sum_bank {
+    width: 396px;
+    display: inline-table;
+    height: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    /*position: fixed;*/
+    position : absolute;
+    top: 285px;
+    text-align: left;
+    margin-left: 180px;
+    border: 0;
+}
+.cheque_sign {
+    margin-top: -110px;
+    width: 14%;
+    margin-left: 0px;
+}
+.bd{
+    text-align:right;
+    text-transform:uppercase;
+    font-family: Helvetica;
+    font-size: 20px;
+    letter-spacing: 8px;
+}
+.dollar{
+    text-align:right;
+    text-transform:uppercase;
+    font-family: Helvetica;
+    font-size: 0.5em;
+    margin-left:298px;
+    position:fixed;
+    top:162px;
+}
+
+
+.info{
+    border-collapse: collapse;
+    margin-left:11px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Helvetica;
+    font-size: 10px;
+    border:1px solid #333;
+    display:inline-table;
+    width:80%;
+}
+
+#date_bank{
+    font-size: 18px;
+    width: 115px;
+    margin-left: 460px;
+    margin-top: 55px;
+    border: 0;
+}
+#name_bank{
+    width: 600px;
+    font-size: 17px;
+    margin-top: 0px;
+    margin-left: 75px;
+    border: 0;
+}
+/*input[name="num"]{*/
+/*    width: 50px;*/
+/*    font-size: 13px;*/
+/*}*/
+/*input[name="description"]{*/
+/*    width: 200px;*/
+/*    font-size: 14px;*/
+/*}*/
+/*input[name="discount"]{*/
+/*    width: 50px;*/
+/*    font-size: 13px;*/
+/*}*/
+.row{
+
+}
+.chart{
+    border:1px solid #333;
+    font-weight:normal;
+}
+#discount{
+    border-left:1px dashed;
+
+}
+.blank{
+    height: 40px;
+    border:1px solid #333;
+    font-size:14px;
+
+}
+.short{
+    width:79px;
+}
+.long{
+    width:300px;
+    font-size:18px;
+}
+.des{
+    font-size: 15px;
+}
+.amount{
+    text-align:center;
+    width:144px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Helvetica;
+    font-size: 11px;
+    margin-right: 30px;
+    float: right;
+    display: inline;
+    position: absolute;
+    right: -7px;
+    top: 144px;
+
+}
+.sign{
+    font-family: Helvetica;
+    font-size: 15px;
+    padding-right: 10px;
+    position: fixed;
+    display: inline;
+    right: 620px;
+    top: 209px;
+}
+/*p{*/
+/*    text-transform:uppercase;*/
+/*    font-family: Helvetica;*/
+/*    font-size: 11px;*/
+/*    letter-spacing: 0.5px;*/
+/*    display: inline;*/
+/*    padding-left: 25px;*/
+/*    text-align: center;*/
+/*}*/
+.box{
+
+    border:1px solid #333;
+    width:120px;
+    height:30px;
+    float:right;
+    clear:both;
+    margin-top:20px;
+}
+
+.whole{
+    border-right:1px dashed #333;
+    height:28px;
+    width:84px;
+    margin-top:0.7px;
+}
+/*input[name="whole"]{*/
+/*    text-align: right;*/
+/*    width: 72px;*/
+/*    right: 544px;*/
+/*    top: 204px;*/
+/*    font-size: 18px;;*/
+/*}*/
+/*input[name="cent"]{*/
+/*    text-align: right;*/
+/*    width: 23px;*/
+/*    display: inline;*/
+/*    font-size: 18px;*/
+/*    position: absolute;*/
+/*    margin-left: 12px;;*/
+/*}*/
+.cent{
+
+}
+.num {
+    font-family: 'Damion', cursive;
+    font-size: 1.5em;
+    float: left;
+    border: 2px solid #aaa;
+    position: relative;
+    margin: 0 0 0 2em;
+    padding: 0 0.5em;
+    line-height: 0.9em;
+}
+
+.num:before {
+    font-family: Helvetica;
+    content: '$';
+    font-weight: bold;
+    position: absolute;
+    left: 1em;
+}
+
+.dollars {
+    font-family: 'Damion', cursive;
+    font-size: 1.5em;
+    border-bottom: 1px solid #666;
+    width: 84%;
+    float: left;
+    padding: 0 0 0 4em;
+    position: relative;
+}
+
+.dollars:after {
+    font-family: Helvetica;
+    font-size: 0.5em;
+    content: 'DOLLARS';
+    position: absolute;
+    right: -5em;
+    top: 1.7em;
+}
+.add{
+    width:267px;
+    margin-left:80px;
+    margin-top:5px;
+
+}
+
+.lines{
+    border-bottom:1px solid #333;
+    height:25px;
+    font-size:13px;
+    text-align:center;
+    padding:0;
+    margin:0;
+
+}
+/*input[name="address"], input[name="citystate"]{*/
+/*    font-size: 13px;*/
+/*    width: 260px;*/
+/*    text-transform: uppercase;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+
+/*}*/
+.bank{
+    font-size: 9px;
+    text-align: center;
+    font-family: Helvetica;
+    height: 25px;
+    padding-top: 10px;
+    letter-spacing: 0.5px;
+}
+.signature{
+    margin: 0 10px 30px 0.7em;
+    width: 40%;
+    padding-bottom: -13px;
+    /*right: 10;*/
+    float: right;;
+}
+.sig {
+    font-family: 'Mrs Saint Delafield', cursive;
+    font-size: 2em;
+
+    border-bottom: 1px solid #333;
+    line-height: 0.9em;
+
+}
+.mp{
+    text-align: right;
+    font-size: 8px;
+    font-weight: bold;
+    /*letter-spacing: -8;*/
+}
